@@ -15,7 +15,7 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     Future.delayed(Duration(seconds: 3),(){
       if(mounted){
-        //Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomePage(),));
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomePage(),));
       }
     });
   }
@@ -26,11 +26,14 @@ class _SplashScreenState extends State<SplashScreen> {
       body: SafeArea(
           child: Center(
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 CircleAvatar(
                   radius: 80,
-                  child: Icon(Icons.account_circle),
-                )
+                  backgroundImage: AssetImage("assets/icon/deeplink.jpg"),
+                ),
+                SizedBox(height: 30,),
+                Text("Deep Linking",style: TextStyle(color: Colors.black,fontSize: 35,fontWeight: FontWeight.bold),)
               ],
             ),
           )
