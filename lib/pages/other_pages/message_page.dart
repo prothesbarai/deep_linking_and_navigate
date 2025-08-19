@@ -1,24 +1,24 @@
+import 'package:deep_linking_and_navigate/widgets/custom_appbar.dart';
 import 'package:flutter/material.dart';
-import '../../widgets/custom_appbar.dart';
 import '../../widgets/custom_bottombar.dart';
 import '../../widgets/custom_floating_button.dart';
 
-class DashBoard extends StatelessWidget {
-  const DashBoard({super.key});
+class MessagePage extends StatelessWidget {
+  const MessagePage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       extendBody: true,
-      appBar: CustomAppbar(title: "Dashboard"),
+      appBar: CustomAppbar(title: "Message Page"),
       bottomNavigationBar: CustomBottombar(),
       floatingActionButton: CustomFloatingButton(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       body: SingleChildScrollView(
         child: Column(
-            children: <Widget>[
+          children: <Widget>[
 
-            ]
+          ]
         ),
       ),
     );

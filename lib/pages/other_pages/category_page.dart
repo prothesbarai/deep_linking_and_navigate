@@ -3,24 +3,17 @@ import '../../widgets/custom_appbar.dart';
 import '../../widgets/custom_bottombar.dart';
 import '../../widgets/custom_floating_button.dart';
 
-class DashBoard extends StatelessWidget {
-  const DashBoard({super.key});
+class CategoryPage extends StatelessWidget {
+  const CategoryPage ({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       extendBody: true,
-      appBar: CustomAppbar(title: "Dashboard"),
+      appBar: CustomAppbar(title: "Category Page"),
       bottomNavigationBar: CustomBottombar(),
       floatingActionButton: CustomFloatingButton(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      body: SingleChildScrollView(
-        child: Column(
-            children: <Widget>[
-
-            ]
-        ),
-      ),
     );
   }
 }
