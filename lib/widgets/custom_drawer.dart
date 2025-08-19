@@ -13,7 +13,8 @@ class CustomDrawer extends StatelessWidget {
         child: Column(
           children: [
             DrawerHeader(
-                child: Row(
+              decoration: UnderlineTabIndicator(borderSide: BorderSide(color: Colors.white,width: 1)),
+              child: Row(
                   children:<Widget>[
                     CircleAvatar(
                       radius: 50,
@@ -37,7 +38,7 @@ class CustomDrawer extends StatelessWidget {
             SizedBox(height: 10,),
             _buildItems(context, Icons.home, "Home", ProfilePage()),
             _buildItems(context, Icons.account_balance, "Account", ProfilePage()),
-             Divider(),
+             Divider(color: Colors.white,thickness: 1.5,),
             _buildItems(context, Icons.ac_unit, "Sharp", ProfilePage()),
             _buildItems(context, Icons.account_balance_wallet, "Balance", ProfilePage()),
           ],

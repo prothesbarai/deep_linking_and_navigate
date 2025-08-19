@@ -11,7 +11,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(useMaterial3: false,),
+      theme: ThemeData(
+        primaryColor: Color(0xff40c2e2),
+        useMaterial3: false,
+        appBarTheme: AppBarTheme(backgroundColor: Color(0xfff7f7f7),),
+        elevatedButtonTheme: ElevatedButtonThemeData(style: ElevatedButton.styleFrom(backgroundColor: Colors.white,foregroundColor: Colors.black),),
+        drawerTheme: DrawerThemeData(shape: RoundedRectangleBorder(borderRadius: BorderRadius.horizontal(right: Radius.circular(20), left: Radius.circular(20),),),),
+      ),
       debugShowCheckedModeBanner: false,
       home: SplashScreen(),
     );
