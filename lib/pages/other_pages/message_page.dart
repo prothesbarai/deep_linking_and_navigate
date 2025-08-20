@@ -16,7 +16,11 @@ class _MessagePageState extends State<MessagePage> {
   final _formKey = GlobalKey<FormState>();
   TextEditingController getTextController = TextEditingController();
   TextEditingController getValueController = TextEditingController();
+  String text = "";
+  int value = 0;
 
+  String? selectedDropDownItem;
+  List<String> dropDownItems = ["Apple","Ball","Cat","Dog"];
 
   @override
   void dispose() {
@@ -29,7 +33,6 @@ class _MessagePageState extends State<MessagePage> {
   @override
   Widget build(BuildContext context) {
 
-    String text = "iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii";
 
     return Scaffold(
       extendBody: true,
@@ -43,7 +46,7 @@ class _MessagePageState extends State<MessagePage> {
         child: Column(
           children: [
             Container(
-              height: 280,
+              height: 340,
               width: double.infinity,
               padding: EdgeInsets.symmetric(horizontal: 20,vertical: 15),
               decoration: BoxDecoration(color: Color(0xfffafafa),),
@@ -57,6 +60,7 @@ class _MessagePageState extends State<MessagePage> {
                       errorBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.red,width: 2,style: BorderStyle.solid,strokeAlign: BorderSide.strokeAlignInside)),
                       focusedErrorBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.red,width: 2,style: BorderStyle.solid,strokeAlign: BorderSide.strokeAlignInside)),
                       labelStyle: TextStyle(color: Color(0xff2f2f2f)),
+                      isDense: true, // Vertically Compact .. i.e. Remove Default Padding from Vertically
 
                       floatingLabelStyle: WidgetStateTextStyle.resolveWith((state){
                         if(state.contains(WidgetState.error)){return TextStyle(color: Colors.red);}
@@ -118,12 +122,23 @@ class _MessagePageState extends State<MessagePage> {
                           return null;
                         },
                       ),
+                      SizedBox(height: 10,),
+                      DropdownButtonFormField(
+                          decoration: InputDecoration(
+                            hint: Text("Select Your Item"),
+                          ),
+                          items: dropDownItems.map((items){ return DropdownMenuItem<String>(value : items, child: Text(items)); }).toList(),
+                          onChanged: (value){setState(() {selectedDropDownItem = value;});}
+                      ),
                       SizedBox(height: 15,),
                       ElevatedButton(
                           onPressed: (){
                             FocusScope.of(context).unfocus();
                             if(_formKey.currentState!.validate()){
-
+                              setState(() {
+                                text = getTextController.text;
+                                value = int.tryParse(getValueController.text) ?? 0;
+                              });
                             }
                           },
                           style: ElevatedButton.styleFrom(shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20))),
@@ -139,16 +154,12 @@ class _MessagePageState extends State<MessagePage> {
             Expanded(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                  child: ListView(
+                  child: ListView.builder(
                     physics: BouncingScrollPhysics(),
-                    children: [
-
-                      SizedBox(height: 20,),
-
-                      for (int i = 0; i <= 50; i++)
-                        Text(text),
-
-                    ],
+                    itemCount: value,
+                    itemBuilder: (context, index) {
+                      return Text(text);
+                    },
                   ),
                 )
             )
