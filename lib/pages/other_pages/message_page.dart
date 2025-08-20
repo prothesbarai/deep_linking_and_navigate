@@ -1,4 +1,5 @@
 import 'package:deep_linking_and_navigate/widgets/custom_appbar.dart';
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../../widgets/custom_bottombar.dart';
@@ -20,7 +21,8 @@ class _MessagePageState extends State<MessagePage> {
   int value = 0;
 
   String? selectedDropDownItem;
-  List<String> dropDownItems = ["Apple","Ball","Cat","Dog"];
+  List<String> dropDownItems = ["Lion", "Tiger", "Elephant", "Zebra", "Giraffe", "Monkey", "Kangaroo", "Panda", "Leopard", "Cheetah", "Bear", "Wolf", "Fox", "Rabbit", "Horse", "Deer", "Camel", "Goat", "Sheep", "Dog", "Cat", "Dolphin", "Whale", "Eagle", "Owl", "Parrot", "Penguin", "Crocodile", "Turtle", "Snake",];
+
 
   @override
   void dispose() {
@@ -123,13 +125,18 @@ class _MessagePageState extends State<MessagePage> {
                         },
                       ),
                       SizedBox(height: 10,),
-                      DropdownButtonFormField(
-                          decoration: InputDecoration(
-                            hint: Text("Select Your Item"),
-                          ),
-                          items: dropDownItems.map((items){ return DropdownMenuItem<String>(value : items, child: Text(items)); }).toList(),
-                          onChanged: (value){setState(() {selectedDropDownItem = value;});}
+
+
+                      DropdownButtonFormField2<String>(
+                        value: selectedDropDownItem,
+                        decoration: InputDecoration(labelText: 'Select Item', contentPadding: EdgeInsets.symmetric(vertical: 12,horizontal: 12),),
+                        items: dropDownItems.map((item) => DropdownMenuItem<String>(value: item, child: Text(item),)).toList(),
+                        onChanged: (value) => setState(() => selectedDropDownItem = value),
+                        dropdownStyleData: const DropdownStyleData(maxHeight: 200,),
+                        menuItemStyleData: MenuItemStyleData(padding: EdgeInsets.symmetric(horizontal: 8.0),),
                       ),
+
+
                       SizedBox(height: 15,),
                       ElevatedButton(
                           onPressed: (){
