@@ -37,6 +37,7 @@ class CustomBottombar extends StatelessWidget {
           Icon(icon,color: Colors.white,size: 20,),
           SizedBox(height: 2,),
           Text(text,style: TextStyle(color: Colors.white,fontSize: 12),),
+          SizedBox(height: 8,),
         ],
       ),
     );
