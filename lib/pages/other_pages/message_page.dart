@@ -24,6 +24,10 @@ class _MessagePageState extends State<MessagePage> {
   List<String> dropDownItems = ["Lion", "Tiger", "Elephant", "Zebra", "Giraffe", "Monkey", "Kangaroo", "Panda", "Leopard", "Cheetah", "Bear", "Wolf", "Fox", "Rabbit", "Horse", "Deer", "Camel", "Goat", "Sheep", "Dog", "Cat", "Dolphin", "Whale", "Eagle", "Owl", "Parrot", "Penguin", "Crocodile", "Turtle", "Snake",];
 
 
+  bool isCheckedPrevious = false;
+  bool isCheckedBoth = false;
+  bool isCheckedAfter = false;
+
   @override
   void dispose() {
     getTextController.dispose();
@@ -48,7 +52,7 @@ class _MessagePageState extends State<MessagePage> {
         child: Column(
           children: [
             Container(
-              height: 340,
+              height: 400,
               width: double.infinity,
               padding: EdgeInsets.symmetric(horizontal: 20,vertical: 15),
               decoration: BoxDecoration(color: Color(0xfffafafa),),
@@ -137,6 +141,42 @@ class _MessagePageState extends State<MessagePage> {
                       ),
 
 
+                      Row(
+                        children: [
+                          Row(
+                            children: [
+                              Checkbox(
+                                value: isCheckedPrevious,
+                                onChanged: (bool? value){setState(() {isCheckedPrevious = value!;});},
+                                checkColor: Colors.white,
+                              ),
+                              Text("Add Previous")
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Checkbox(
+                                value: isCheckedBoth,
+                                onChanged: (bool? value){setState(() {isCheckedBoth = value!;});},
+                                checkColor: Colors.white,
+                              ),
+                              Text("Add Both")
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Checkbox(
+                                value: isCheckedAfter,
+                                onChanged: (bool? value){setState(() {isCheckedAfter = value!;});},
+                                checkColor: Colors.white,
+                              ),
+                              Text("Add After")
+                            ],
+                          ),
+                        ],
+                      ),
+
+
                       SizedBox(height: 15,),
                       ElevatedButton(
                           onPressed: (){
@@ -165,7 +205,7 @@ class _MessagePageState extends State<MessagePage> {
                     physics: BouncingScrollPhysics(),
                     itemCount: value,
                     itemBuilder: (context, index) {
-                      return Text(text);
+                      return Text(selectedDropDownItem != null ? "$text $selectedDropDownItem" : text);
                     },
                   ),
                 )
