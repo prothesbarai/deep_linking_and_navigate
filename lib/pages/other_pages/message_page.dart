@@ -21,7 +21,18 @@ class _MessagePageState extends State<MessagePage> {
   int value = 0;
 
   String? selectedDropDownItem;
-  List<String> dropDownItems = ["Lion", "Tiger", "Elephant", "Zebra", "Giraffe", "Monkey", "Kangaroo", "Panda", "Leopard", "Cheetah", "Bear", "Wolf", "Fox", "Rabbit", "Horse", "Deer", "Camel", "Goat", "Sheep", "Dog", "Cat", "Dolphin", "Whale", "Eagle", "Owl", "Parrot", "Penguin", "Crocodile", "Turtle", "Snake",];
+  //List<String> dropDownItems = ["Lion", "Tiger", "Elephant", "Zebra", "Giraffe", "Monkey", "Kangaroo", "Panda", "Leopard", "Cheetah", "Bear", "Wolf", "Fox", "Rabbit", "Horse", "Deer", "Camel", "Goat", "Sheep", "Dog", "Cat", "Dolphin", "Whale", "Eagle", "Owl", "Parrot", "Penguin", "Crocodile", "Turtle", "Snake",];
+  List<String> dropDownItems = [
+    "❤️","😂","😢","😮","😡","👍","👎","😍","🤗","👏",
+    "😎","😇","🤔","🙄","🤩","🥰","😏","😱","🥳","😴",
+    "🤤","🤯","🤪","😛","😜","😝","😤","🤐","😬","🤫",
+    "😳","🥵","🥶","😵","🤢","🤮","🤧","😷","🤒","🤕",
+    "🤑","🤠","😺","😸","😹","😻","😼","😽","🙀","😿",
+    "😾","🤡","👻","💀","☠️","👽","🤖","💩","🎃","😺",
+    "🤲","🫂","🙏","🤝","💪","🖖","✌️","🤟","🤘","👌",
+    "👋","🤚","🖐","✋","🫱","🫲","🫳","🫴"
+  ];
+
 
 
   bool isCheckedPrevious = false;
@@ -143,54 +154,117 @@ class _MessagePageState extends State<MessagePage> {
 
                       Row(
                         children: [
-                          Row(
-                            children: [
-                              Checkbox(
-                                value: isCheckedPrevious,
-                                onChanged: (bool? value){setState(() {isCheckedPrevious = value!;});},
-                                checkColor: Colors.white,
+                          if(selectedDropDownItem != null)...[
+                            InkWell(
+                              onTap: (){
+                                setState(() {
+                                  isCheckedPrevious = !isCheckedPrevious;
+                                  isCheckedBoth = false;
+                                  isCheckedAfter = false;
+                                });
+                              },
+                              child: Row(
+                                children: [
+                                  Checkbox(
+                                    value: isCheckedPrevious,
+                                    onChanged: (bool? value){setState(() {
+                                      isCheckedPrevious = value!;
+                                      isCheckedBoth = false;
+                                      isCheckedAfter = false;
+                                    });},
+                                    checkColor: Colors.white,
+                                  ),
+                                  Text("Add Previous")
+                                ],
                               ),
-                              Text("Add Previous")
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              Checkbox(
-                                value: isCheckedBoth,
-                                onChanged: (bool? value){setState(() {isCheckedBoth = value!;});},
-                                checkColor: Colors.white,
+                            ),
+                            InkWell(
+                              onTap: (){
+                                setState(() {
+                                  isCheckedBoth = !isCheckedBoth;
+                                  isCheckedPrevious = false;
+                                  isCheckedAfter = false;
+                                });
+                              },
+                              child: Row(
+                                children: [
+                                  Checkbox(
+                                    value: isCheckedBoth,
+                                    onChanged: (bool? value){setState(() {
+                                      isCheckedBoth = value!;
+                                      isCheckedPrevious = false;
+                                      isCheckedAfter = false;
+                                    });},
+                                    checkColor: Colors.white,
+                                  ),
+                                  Text("Add Both")
+                                ],
                               ),
-                              Text("Add Both")
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              Checkbox(
-                                value: isCheckedAfter,
-                                onChanged: (bool? value){setState(() {isCheckedAfter = value!;});},
-                                checkColor: Colors.white,
+                            ),
+                            InkWell(
+                              onTap: (){
+                                setState(() {
+                                  isCheckedAfter = !isCheckedAfter;
+                                  isCheckedPrevious = false;
+                                  isCheckedBoth = false;
+                                });
+                              },
+                              child: Row(
+                                children: [
+                                  Checkbox(
+                                    value: isCheckedAfter,
+                                    onChanged: (bool? value){setState(() {
+                                      isCheckedAfter = value!;
+                                      isCheckedPrevious = false;
+                                      isCheckedBoth = false;
+                                    });},
+                                    checkColor: Colors.white,
+                                  ),
+                                  Text("Add After")
+                                ],
                               ),
-                              Text("Add After")
-                            ],
-                          ),
+                            ),
+                          ]
                         ],
                       ),
 
 
                       SizedBox(height: 15,),
-                      ElevatedButton(
-                          onPressed: (){
-                            FocusScope.of(context).unfocus();
-                            if(_formKey.currentState!.validate()){
-                              setState(() {
-                                text = getTextController.text;
-                                value = int.tryParse(getValueController.text) ?? 0;
-                              });
-                            }
-                          },
-                          style: ElevatedButton.styleFrom(shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20))),
-                          child: Text("Submit")
-                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          ElevatedButton(
+                              onPressed: (){
+                                FocusScope.of(context).unfocus();
+                                if(_formKey.currentState!.validate()){
+                                  setState(() {
+                                    text = getTextController.text;
+                                    value = int.tryParse(getValueController.text) ?? 0;
+                                  });
+                                }
+                              },
+                              style: ElevatedButton.styleFrom(shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20))),
+                              child: Text("Submit")
+                          ),
+                          SizedBox(width: 10,),
+                          ElevatedButton(
+                              onPressed: () {
+                                FocusScope.of(context).unfocus();
+                                setState(() {
+                                  text = "";
+                                  getTextController.clear();
+                                  getValueController.clear();
+                                  selectedDropDownItem = null;
+                                  isCheckedPrevious = false;
+                                  isCheckedBoth = false;
+                                  isCheckedAfter = false;
+                                });
+                              },
+                              style: ElevatedButton.styleFrom(shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20))),
+                              child: Text("Reset")
+                          ),
+                        ],
+                      )
                     ],
                   ),
                 ),
@@ -205,7 +279,15 @@ class _MessagePageState extends State<MessagePage> {
                     physics: BouncingScrollPhysics(),
                     itemCount: value,
                     itemBuilder: (context, index) {
-                      return Text(selectedDropDownItem != null ? "$text $selectedDropDownItem" : text);
+                      if(isCheckedAfter){
+                        return Text(selectedDropDownItem != null ? "$text $selectedDropDownItem" : text);
+                      }else if(isCheckedPrevious){
+                        return Text(selectedDropDownItem != null ? "$selectedDropDownItem $text" : text);
+                      }else if(isCheckedBoth){
+                        return Text(selectedDropDownItem != null ? "$selectedDropDownItem $text $selectedDropDownItem" : text);
+                      }else{
+                        return Text(text);
+                      }
                     },
                   ),
                 )
