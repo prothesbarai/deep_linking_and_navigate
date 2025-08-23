@@ -1,6 +1,6 @@
-import 'package:deep_linking_and_navigate/pages/home_page/home_page.dart';
 import 'package:deep_linking_and_navigate/pages/other_pages/category_page.dart';
 import 'package:deep_linking_and_navigate/pages/other_pages/dash_board.dart';
+import 'package:deep_linking_and_navigate/pages/other_pages/membership_page.dart';
 import 'package:flutter/material.dart';
 import '../pages/other_pages/message_page.dart';
 
@@ -18,7 +18,7 @@ class CustomBottombar extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children:<Widget>[
           _buildBottomNavItem(context, Icons.category_outlined, "Category", CategoryPage()),
-          _buildBottomNavItem(context, Icons.card_membership, "Member", HomePage()),
+          _buildBottomNavItem(context, Icons.card_membership, "Member", MembershipPage()),
            SizedBox(width: 30,),
           _buildBottomNavItem(context, Icons.message, "Message", MessagePage()),
           _buildBottomNavItem(context, Icons.account_circle, "Account", DashBoard()),
