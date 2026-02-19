@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../../widgets/custom_appbar.dart';
 import '../../widgets/custom_floating_button.dart';
 
 class CategoryPage extends StatelessWidget {
@@ -9,7 +8,6 @@ class CategoryPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBody: true,
-      appBar: CustomAppbar(title: "Category Page"),
       floatingActionButton: CustomFloatingButton(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       body: Center(),

@@ -22,8 +22,6 @@ class _HomePageState extends State<HomePage> {
   List<String> appBarTitles = ["Category", "Membership", "Message", "Dashboard",];
 
 
-
-
   @override
   Widget build(BuildContext context) {
 
@@ -34,11 +32,7 @@ class _HomePageState extends State<HomePage> {
       bottomNavigationBar: CustomBottomBar(currentIndex: _currentIndex,onTap: (index) {setState(() {_currentIndex = index;});},),
       floatingActionButton: CustomFloatingButton(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      body: Column(
-        children: <Widget>[
-
-        ],
-      )
+      body: pages[_currentIndex],
     );
   }
 }

@@ -1,8 +1,4 @@
-import 'package:deep_linking_and_navigate/widgets/custom_appbar.dart';
-import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import '../../widgets/custom_bottom_bar.dart';
 import '../../widgets/custom_floating_button.dart';
 
 class MessagePage extends StatefulWidget {
@@ -23,7 +19,6 @@ class _MessagePageState extends State<MessagePage> {
 
     return Scaffold(
       extendBody: true,
-      appBar: CustomAppbar(title: "Message Page"),
       floatingActionButton: CustomFloatingButton(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       body: GestureDetector(
