@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../widgets/custom_appbar.dart';
-import '../../widgets/custom_bottombar.dart';
+import '../../widgets/custom_bottom_bar.dart';
 import '../../widgets/custom_floating_button.dart';
 
 class DashBoard extends StatelessWidget {
@@ -11,7 +11,6 @@ class DashBoard extends StatelessWidget {
     return Scaffold(
       extendBody: true,
       appBar: CustomAppbar(title: "Dashboard"),
-      bottomNavigationBar: CustomBottombar(),
       floatingActionButton: CustomFloatingButton(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       body: SingleChildScrollView(
