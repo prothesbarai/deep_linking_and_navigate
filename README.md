@@ -6,6 +6,11 @@ Deep Linking Application
 
 # Deep Linking Guide
 #### Deep linking এর মাধ্যমে ব্যবহারকারী সরাসরি কোনো URL বা লিঙ্ক থেকে অ্যাপের নির্দিষ্ট পেজে পৌঁছাতে পারে। এটি চ্যাট অ্যাপে খুবই গুরুত্বপূর্ণ, যেমন: নির্দিষ্ট চ্যাট রুমে সরাসরি যাওয়া।
+# 🎯 Deep Linking Rule মনে রাখো
+- Scenario	>>>>>>     কে control করে?
+- App installed	>>     Android OS
+- App not installed	>> Browser
+- Dart code	>>>        Only when app is installed
 
 ## Install Packages
 ```yaml
@@ -49,7 +54,6 @@ class NavigationService {
 import 'package:app_links/app_links.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
 import '../pages/home_page/home_page.dart';
 import '../pages/other_pages/category_page.dart';
 import '../pages/other_pages/membership_page.dart';
@@ -69,22 +73,10 @@ void initDeepLink() async{
 }
 
 
-/// >>> Open the app page if installed, otherwise go to Play Store =============
-Future<void> openAppOrStore({required Uri appUri, required Uri storeUri}) async{
-  try {
-    if (await canLaunchUrl(appUri)) {
-      await launchUrl(appUri); // >>> app open
-    } else {
-      await launchUrl(storeUri, mode: LaunchMode.externalApplication); //>>> Play Store open
-    }
-  } catch (e) {
-    await launchUrl(storeUri, mode: LaunchMode.externalApplication);
-  }
-}
-
+/// >>> Open the app page if installed =========================================
 void handleLink(Uri uri) async{
   debugPrint("Deep link: $uri");
-  
+
   // Supported domains / schemes
   List<String> supportedDomains = ["prothesbarai.github.io", "prothesbarai.github", "https://prothesbarai.io"];
   bool domainSupported = supportedDomains.any((d) => uri.host.endsWith(d));
@@ -92,26 +84,9 @@ void handleLink(Uri uri) async{
   if (!domainSupported) {
     // >>> Unsupported domain, fallback behavior
     debugPrint("Unsupported domain: redirecting to homepage or Play Store");
-    NavigationService.push(HomePage()); // or Play Store
+    NavigationService.push(HomePage());
     return;
   }
-
-
-
-  // >>> Play Store URL
-  Uri storeUri = Uri.parse("https://play.google.com/store/apps/details?id=com.example.myapp");
-  // >>> Android/iOS app URL scheme
-  Uri appUri = uri;
-
-  // >>> Try opening the app first
-  /*if (!await canLaunchUrl(appUri)) {
-    await launchUrl(storeUri, mode: LaunchMode.externalApplication);
-    return;
-  }*/
-
-  // Open app or fallback
-  await openAppOrStore(appUri: appUri, storeUri: storeUri);
-
 
   // >>> If the app is installed, it will navigate to a specific page
   if (uri.pathSegments.contains('product')) {
@@ -124,7 +99,7 @@ void handleLink(Uri uri) async{
     NavigationService.push(CategoryPage(catId: catId,));
   }
 }
-/// <<< Open the app page if installed, otherwise go to Play Store =============
+/// <<< Open the app page if installed =========================================
 ```
 
 ## Now main.dart Call
@@ -139,19 +114,19 @@ void main() {
 // >>> In MaterialApp Function Write this line 
 navigatorKey : NavigationService.navigatorKey,
 ```
- 
-# 🟢 ANDROID (Kotlin Setup)
 
+
+# 🟢 ANDROID (Kotlin Setup)
 - Setup For Android :
 - - নেভিগেট করুন android/app/src/main/AndroidManifest.xml
 - - - <activity>ট্যাগের ভিতরে নিম্নলিখিত মেটাডেটা ট্যাগ এবং ইনটেন্ট ফিল্টার যোগ করুন
 ```xml
+    <!--Deep Linking Purpose Add -->
     <intent-filter android:autoVerify="true">
         <action android:name="android.intent.action.VIEW" />
         <category android:name="android.intent.category.DEFAULT" />
         <category android:name="android.intent.category.BROWSABLE" />
-        <data android:scheme="http" android:host="example.com" />
-        <data android:scheme="https" />
+        <data android:scheme="https" android:host="prothesbarai.github.io" android:pathPrefix="/" />
     </intent-filter>
 ```
 - - - Note : android:host="example.com"  Here Your Domain Name >> Ex : prothesbarai.github.io
@@ -204,7 +179,79 @@ navigatorKey : NavigationService.navigatorKey,
 }
 ```
 
+
+
+
+# If Not Install App Then >>>
+- একটা redirect page বানাও
+- Example: https://prothesbarai.github.io/product/10 এই URL এ যদি app install না থাকে → Browser খুলবে
+- Browser page এ এই JavaScript রাখো:
+```html
+    <script>
+      setTimeout(function() {window.location.href = "https://play.google.com/store/apps/details?id=com.your.package";}, 1500);
+    </script>
+```
+
+### Flow হবে:
+- App installed → OS সরাসরি app open
+- App not installed → Browser open
+- 1.5 sec পরে → Play Store redirect
+
+- Browser page এ JavaScript ata index.html file দিয়ে রাখতে হয় তবে auto redirect করবে কিন্তু যদি github হয় তাহলে
+- Step 1 :
+- Create 404.html in root
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Redirecting...</title>
+  <script>
+    // All unknown routes fallback to index.html
+    window.location.replace("/fallback_screen_android_apps/falback.html");
+  </script>
+</head>
+<body>
+  <p>Redirecting to app...</p>
+</body>
+</html>
+```
+- Step -2
+- Create fallback_screen_android_apps Folder and in folder create a falback.html file
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Opening App...</title>
+
+  <script>
+    var storeUrl = "https://play.google.com/store/apps/details?id=com.deep_linking_and_navigate";
+
+    // Wait 1.5 sec then redirect to Play Store
+    setTimeout(function () { window.location.href = storeUrl;}, 1500);
+  </script>
+</head>
+
+<body style="text-align:center; font-family: Arial; margin-top:100px;">
+  <h2>Opening App...</h2>
+  <p>If the app is not installed, redirecting to Play Store...</p>
+
+  <p>
+    <a href="https://play.google.com/store/apps/details?id=com.deep_linking_and_navigate">
+      Click here if not redirected
+    </a>
+  </p>
+</body>
+</html>
+```
+
+
+
 # SHA key Find Command
 ```dtd
     keytool -list -v -keystore "C:\Users\Prothes\.android\debug.keystore" -alias androiddebugkey -storepass android -keypass android
 ```
+
+
+
