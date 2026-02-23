@@ -2,6 +2,7 @@ import 'package:app_links/app_links.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+import '../pages/home_page/home_page.dart';
 import '../pages/other_pages/category_page.dart';
 import '../pages/other_pages/membership_page.dart';
 import '../pages/other_pages/product_page.dart';
@@ -35,6 +36,19 @@ Future<void> openAppOrStore({required Uri appUri, required Uri storeUri}) async{
 
 void handleLink(Uri uri) async{
   debugPrint("Deep link: $uri");
+
+  // Supported domains / schemes
+  List<String> supportedDomains = ["prothesbarai.github.io", "prothesbarai.github", "https://prothesbarai.io"];
+  bool domainSupported = supportedDomains.any((d) => uri.host.endsWith(d));
+
+  if (!domainSupported) {
+    // >>> Unsupported domain, fallback behavior
+    debugPrint("Unsupported domain: redirecting to homepage or Play Store");
+    NavigationService.push(HomePage()); // or Play Store
+    return;
+  }
+
+
 
   // >>> Play Store URL
   Uri storeUri = Uri.parse("https://play.google.com/store/apps/details?id=com.example.myapp");

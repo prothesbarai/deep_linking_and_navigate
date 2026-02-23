@@ -6,28 +6,15 @@ Deep Linking Application
 
 # Deep Linking Guide
 #### Deep linking এর মাধ্যমে ব্যবহারকারী সরাসরি কোনো URL বা লিঙ্ক থেকে অ্যাপের নির্দিষ্ট পেজে পৌঁছাতে পারে। এটি চ্যাট অ্যাপে খুবই গুরুত্বপূর্ণ, যেমন: নির্দিষ্ট চ্যাট রুমে সরাসরি যাওয়া।
-- Setup For Android :
-- - নেভিগেট করুন android/app/src/main/AndroidManifest.xml
-- - - <activity>ট্যাগের ভিতরে নিম্নলিখিত মেটাডেটা ট্যাগ এবং ইনটেন্ট ফিল্টার যোগ করুন
-```xml
-    <intent-filter android:autoVerify="true">
-        <action android:name="android.intent.action.VIEW" />
-        <category android:name="android.intent.category.DEFAULT" />
-        <category android:name="android.intent.category.BROWSABLE" />
-        <data android:scheme="http" android:host="example.com" />
-        <data android:scheme="https" />
-    </intent-filter>
-```
-- - - Note : android:host="example.com"  Here Your Domain Name >> Ex : prothesbarai.github.io
 
-# Install Packages
+## Install Packages
 ```yaml
   # Deep Link Purpose
   app_links: ^6.4.1
   url_launcher: ^6.3.2
 ```
 
-# Dart Code Helper Function (deep_link_handler Folder two files)
+## Dart Code Helper Function (deep_link_handler Folder two files)
 - navigation_service.dart
 ```dart
 import 'package:flutter/material.dart';
@@ -63,6 +50,7 @@ import 'package:app_links/app_links.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+import '../pages/home_page/home_page.dart';
 import '../pages/other_pages/category_page.dart';
 import '../pages/other_pages/membership_page.dart';
 import '../pages/other_pages/product_page.dart';
@@ -96,6 +84,19 @@ Future<void> openAppOrStore({required Uri appUri, required Uri storeUri}) async{
 
 void handleLink(Uri uri) async{
   debugPrint("Deep link: $uri");
+  
+  // Supported domains / schemes
+  List<String> supportedDomains = ["prothesbarai.github.io", "prothesbarai.github", "https://prothesbarai.io"];
+  bool domainSupported = supportedDomains.any((d) => uri.host.endsWith(d));
+
+  if (!domainSupported) {
+    // >>> Unsupported domain, fallback behavior
+    debugPrint("Unsupported domain: redirecting to homepage or Play Store");
+    NavigationService.push(HomePage()); // or Play Store
+    return;
+  }
+
+
 
   // >>> Play Store URL
   Uri storeUri = Uri.parse("https://play.google.com/store/apps/details?id=com.example.myapp");
@@ -126,7 +127,7 @@ void handleLink(Uri uri) async{
 /// <<< Open the app page if installed, otherwise go to Play Store =============
 ```
 
-# Now main.dart Call
+## Now main.dart Call
 ```dart
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -137,4 +138,68 @@ void main() {
 }
 // >>> In MaterialApp Function Write this line 
 navigatorKey : NavigationService.navigatorKey,
+```
+ 
+# 🟢 ANDROID (Kotlin Setup)
+
+- Setup For Android :
+- - নেভিগেট করুন android/app/src/main/AndroidManifest.xml
+- - - <activity>ট্যাগের ভিতরে নিম্নলিখিত মেটাডেটা ট্যাগ এবং ইনটেন্ট ফিল্টার যোগ করুন
+```xml
+    <intent-filter android:autoVerify="true">
+        <action android:name="android.intent.action.VIEW" />
+        <category android:name="android.intent.category.DEFAULT" />
+        <category android:name="android.intent.category.BROWSABLE" />
+        <data android:scheme="http" android:host="example.com" />
+        <data android:scheme="https" />
+    </intent-filter>
+```
+- - - Note : android:host="example.com"  Here Your Domain Name >> Ex : prothesbarai.github.io
+
+## Final Server Setup code
+- assetlinks.json (Server এ দিতে হবে)
+```dtd
+ https://yourdomain.com/.well-known/assetlinks.json
+```
+- Example:
+```json
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.your.app",
+      "sha256_cert_fingerprints": ["YOUR_SHA256"]
+    }
+  }
+]
+```
+
+
+# 🍎 iOS (Swift Setup)
+-  Runner → Signing & Capabilities
+- Add:
+```dtd
+    Associated Domains
+```
+- Add:
+```dtd
+    applinks:yourdomain.com
+```
+- Server এ দিতে হবে
+```dtd
+    https://yourdomain.com/.well-known/apple-app-site-association
+```
+- Example:
+```json
+{
+  "applinks": {
+    "details": [
+      {
+        "appID": "TEAMID.com.your.app",
+        "paths": ["*"]
+      }
+    ]
+  }
+}
 ```
