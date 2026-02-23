@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 
 class CustomFloatingButton extends StatelessWidget {
-  const CustomFloatingButton({super.key});
+  final String heroTag;
+  const CustomFloatingButton({super.key, this.heroTag = "custom_fab"});
 
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
+        heroTag: heroTag,
         onPressed: () {},
         shape: CircleBorder(),
         backgroundColor: Color(0xff2f2f2f),

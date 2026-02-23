@@ -24,13 +24,12 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       extendBody: true,
       appBar: CustomAppbar(title: appBarTitles[_currentIndex]),
       drawer: CustomDrawer(),
       bottomNavigationBar: CustomBottomBar(currentIndex: _currentIndex,onTap: (index) {setState(() {_currentIndex = index;});},),
-      floatingActionButton: CustomFloatingButton(),
+      floatingActionButton: CustomFloatingButton(heroTag: "home_fab"),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       body: pages[_currentIndex],
     );
