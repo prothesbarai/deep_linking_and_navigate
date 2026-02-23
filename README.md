@@ -197,7 +197,7 @@ navigatorKey : NavigationService.navigatorKey,
 - App not installed → Browser open
 - 1.5 sec পরে → Play Store redirect
 
-- Browser page এ JavaScript এটা index.html file দিয়ে রাখতে হয় তবে auto redirect করবে কিন্তু [ যদি github হয় তাহলে Step - 1 & Then Step - 2 ] >>> [  Other wise Only Step - 2  ]
+- Browser page এ JavaScript এটা index.html file দিয়ে রাখতে হয় তবে auto redirect করবে কিন্তু [ যদি github হয় তাহলে Step - 1 & Then Step - 2 ] >>> [  Other wise Only Step - 2 & then Must File name index.html put this file root folder ]
 - Step 1 :
 - Create 404.html in root
 ```html
