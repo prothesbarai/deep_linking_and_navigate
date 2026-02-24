@@ -61,17 +61,23 @@ import '../pages/other_pages/product_page.dart';
 import 'navigation_service.dart';
 
 final _appLink = AppLinks();
+bool _deepLinkHandled = false;
 
-void initDeepLink() async{
+Future<bool> initDeepLink() async{
+  if (_deepLinkHandled) return false;
+
   final uri = await _appLink.getInitialLink();
   if(uri != null){
-    handleLink(uri);
+    if (!_deepLinkHandled) {
+      _deepLinkHandled = true;
+      handleLink(uri);
+    }
   }
   _appLink.uriLinkStream.listen((uri){
     handleLink(uri);
   });
+  return false;
 }
-
 
 /// >>> Open the app page if installed =========================================
 void handleLink(Uri uri) async{
@@ -88,15 +94,17 @@ void handleLink(Uri uri) async{
     return;
   }
 
-  // >>> If the app is installed, it will navigate to a specific page
+  // >>> If You Want when app redirect and back press then not again open app start splash screen but back press then app restart by fromDeepLink flag
   if (uri.pathSegments.contains('product')) {
     String id = uri.pathSegments.last;
-    NavigationService.push(ProductPage(productId: id));
-  } else if (uri.pathSegments.contains('membership')) {
-    NavigationService.push(MembershipPage());
-  } else if (uri.pathSegments.contains('category')) {
+    NavigationService.popAllAndPush(ProductPage(productId: id,fromDeepLink: true,));
+  }
+  else if (uri.pathSegments.contains('membership')) {
+    NavigationService.popAllAndPush(MembershipPage( fromDeepLink: true,));
+  }
+  else if (uri.pathSegments.contains('category')) {
     String catId = uri.pathSegments.last;
-    NavigationService.push(CategoryPage(catId: catId,));
+    NavigationService.popAllAndPush(CategoryPage(catId: catId,fromDeepLink: true,));
   }
 }
 /// <<< Open the app page if installed =========================================
@@ -105,14 +113,48 @@ void handleLink(Uri uri) async{
 ## Now main.dart Call
 ```dart
 void main() {
-  WidgetsFlutterBinding.ensureInitialized();
-  // >>> deep link listener & initial link call here
-  initDeepLink();
-
+  WidgetsFlutterBinding.ensureInitialized(); // >>> Mandatory
   runApp(const MyApp());
 }
 // >>> In MaterialApp Function Write this line 
 navigatorKey : NavigationService.navigatorKey,
+```
+
+
+## Now SplashScreen.dart Write Some Code in InitState Method
+```dart
+  @override
+  void initState() {
+    super.initState();
+    _startApp();
+  }
+
+  Future<void> _startApp() async {
+    bool hasDeepLink = await initDeepLink();
+    await Future.delayed(Duration(seconds: 3));
+    if (mounted && !hasDeepLink) {
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => HomePage()),);
+    }
+  }
+```
+
+## Now deep_link_handler.dart page Navigate to overall Page [যে যে পেইজে নেভিগেট হবে সে সব পেইজে এই কো লিখতে হবে কারন যখন ডিপ লিংক থেকে ইউজার নেভিগেট করবে এবং পরে যখন Back Button এ Click করবে তখন যেন App পুনরায় Restart হয়ে Simple Behavior করে ] Write Code
+```dart
+  final bool fromDeepLink; // >> Parameter
+```
+```dart
+  return PopScope(
+    canPop: !fromDeepLink,
+    onPopInvokedWithResult: (didPop, result) {
+      if (fromDeepLink && !didPop) {
+        NavigationService.popAllAndPush(const SplashScreen());
+      }
+    },
+    child: Scaffold(
+      appBar: AppBar(title: const Text("Product Page")),
+      body: Center(child: Text("Product ID: $productId"),),
+    ),
+  );
 ```
 
 

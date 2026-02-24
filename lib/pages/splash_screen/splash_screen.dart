@@ -1,6 +1,8 @@
 import 'package:deep_linking_and_navigate/pages/home_page/home_page.dart';
 import 'package:flutter/material.dart';
 
+import '../../deep_link_handler/deep_link_handler.dart';
+
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
@@ -9,15 +11,19 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  
+
   @override
   void initState() {
     super.initState();
-    Future.delayed(Duration(seconds: 3),(){
-      if(mounted){
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomePage(),));
-      }
-    });
+    _startApp();
+  }
+
+  Future<void> _startApp() async {
+    bool hasDeepLink = await initDeepLink();
+    await Future.delayed(Duration(seconds: 3));
+    if (mounted && !hasDeepLink) {
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => HomePage()),);
+    }
   }
   
   @override

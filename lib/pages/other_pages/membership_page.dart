@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import '../../widgets/custom_floating_button.dart';
 
 class MembershipPage extends StatelessWidget {
-  const MembershipPage({super.key});
+  final bool fromDeepLink;
+  const MembershipPage({super.key, required this.fromDeepLink});
 
   @override
   Widget build(BuildContext context) {

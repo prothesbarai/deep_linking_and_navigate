@@ -1,13 +1,9 @@
 import 'package:deep_linking_and_navigate/pages/splash_screen/splash_screen.dart';
 import 'package:flutter/material.dart';
-import 'deep_link_handler/deep_link_handler.dart';
 import 'deep_link_handler/navigation_service.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  // >>> deep link listener & initial link call here
-  initDeepLink();
-
   runApp(const MyApp());
 }
 

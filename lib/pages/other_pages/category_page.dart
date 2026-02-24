@@ -3,7 +3,8 @@ import '../../widgets/custom_floating_button.dart';
 
 class CategoryPage extends StatelessWidget {
   final String catId;
-  const CategoryPage ({super.key,required this.catId});
+  final bool fromDeepLink;
+  const CategoryPage ({super.key,required this.catId, required this.fromDeepLink});
 
   @override
   Widget build(BuildContext context) {

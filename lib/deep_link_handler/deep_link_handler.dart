@@ -8,17 +8,23 @@ import '../pages/other_pages/product_page.dart';
 import 'navigation_service.dart';
 
 final _appLink = AppLinks();
+bool _deepLinkHandled = false;
 
-void initDeepLink() async{
+Future<bool> initDeepLink() async{
+  if (_deepLinkHandled) return false;
+
   final uri = await _appLink.getInitialLink();
   if(uri != null){
-    handleLink(uri);
+    if (!_deepLinkHandled) {
+      _deepLinkHandled = true;
+      handleLink(uri);
+    }
   }
   _appLink.uriLinkStream.listen((uri){
     handleLink(uri);
   });
+  return false;
 }
-
 
 /// >>> Open the app page if installed =========================================
 void handleLink(Uri uri) async{
@@ -35,15 +41,17 @@ void handleLink(Uri uri) async{
     return;
   }
 
-  // >>> If the app is installed, it will navigate to a specific page
+  // >>> If You Want when app redirect and back press then not again open app start splash screen but back press then app restart by fromDeepLink flag
   if (uri.pathSegments.contains('product')) {
     String id = uri.pathSegments.last;
-    NavigationService.push(ProductPage(productId: id));
-  } else if (uri.pathSegments.contains('membership')) {
-    NavigationService.push(MembershipPage());
-  } else if (uri.pathSegments.contains('category')) {
+    NavigationService.popAllAndPush(ProductPage(productId: id,fromDeepLink: true,));
+  }
+  else if (uri.pathSegments.contains('membership')) {
+    NavigationService.popAllAndPush(MembershipPage( fromDeepLink: true,));
+  }
+  else if (uri.pathSegments.contains('category')) {
     String catId = uri.pathSegments.last;
-    NavigationService.push(CategoryPage(catId: catId,));
+    NavigationService.popAllAndPush(CategoryPage(catId: catId,fromDeepLink: true,));
   }
 }
 /// <<< Open the app page if installed =========================================

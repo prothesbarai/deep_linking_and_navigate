@@ -18,7 +18,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
 
   int _currentIndex = 0;
-  List<Widget> pages = [CategoryPage(catId: "12",),MembershipPage(),MessagePage(), DashBoard()];
+  List<Widget> pages = [CategoryPage(catId: "12",fromDeepLink: false,),MembershipPage(fromDeepLink: false,),MessagePage(), DashBoard()];
   List<String> appBarTitles = ["Category", "Membership", "Message", "Dashboard",];
 
 
