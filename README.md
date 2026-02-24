@@ -96,15 +96,19 @@ void handleLink(Uri uri) async{
 
   // >>> If You Want when app redirect and back press then not again open app start splash screen but back press then app restart by fromDeepLink flag
   if (uri.pathSegments.contains('product')) {
-    String id = uri.pathSegments.last;
-    NavigationService.popAllAndPush(ProductPage(productId: id,fromDeepLink: true,));
+    String? id = uri.queryParameters['id'] ?? (uri.pathSegments.length > 1 ? uri.pathSegments.last : null);
+    if (id != null && id.isNotEmpty) {
+      NavigationService.popAllAndPush(ProductPage(productId: id,fromDeepLink: true,));
+    }
   }
   else if (uri.pathSegments.contains('membership')) {
     NavigationService.popAllAndPush(MembershipPage( fromDeepLink: true,));
   }
   else if (uri.pathSegments.contains('category')) {
-    String catId = uri.pathSegments.last;
-    NavigationService.popAllAndPush(CategoryPage(catId: catId,fromDeepLink: true,));
+    String? catId = uri.queryParameters['id'] ?? (uri.pathSegments.length > 1 ? uri.pathSegments.last : null);
+    if (catId != null && catId.isNotEmpty) {
+      NavigationService.popAllAndPush(CategoryPage(catId: catId,fromDeepLink: true,));
+    }
   }
 }
 /// <<< Open the app page if installed =========================================
