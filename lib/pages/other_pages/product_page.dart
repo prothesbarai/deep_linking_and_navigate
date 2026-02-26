@@ -17,7 +17,7 @@ class ProductPage extends StatelessWidget {
         }
       },
       child: Scaffold(
-        appBar: AppBar(title: const Text("Product Page")),
+        appBar: AppBar( backgroundColor: Color(0xff40c2e2), centerTitle: true, title: Text("Product Page",style: TextStyle(color: Colors.white,),)),
         body: Center(child: Text("Product ID: $productId"),),
       ),
     );
