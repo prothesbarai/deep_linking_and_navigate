@@ -10,6 +10,7 @@ import 'navigation_service.dart';
 final _appLink = AppLinks();
 bool _deepLinkHandled = false;
 
+
 Future<bool> initDeepLink() async{
   if (_deepLinkHandled) return false;
 
@@ -26,22 +27,23 @@ Future<bool> initDeepLink() async{
   return false;
 }
 
-/// >>> Open the app page if installed =========================================
+
+/// ********* Open the app page if installed ===================================
 void handleLink(Uri uri) async{
   debugPrint("Deep link: $uri");
 
-  // Supported domains / schemes
+  // ***** Supported domains / schemes
   List<String> supportedDomains = ["prothesbarai.github.io", "prothesbarai.github", "https://prothesbarai.io", "https://shreyasimadhu.github.io", "shreyasimadhu.github.io", "shreyasimadhu.github"];
   bool domainSupported = supportedDomains.any((d) => uri.host.endsWith(d));
 
   if (!domainSupported) {
-    // >>> Unsupported domain, fallback behavior
+    // ****** Unsupported domain, fallback behavior
     debugPrint("Unsupported domain: redirecting to homepage or Play Store");
     NavigationService.push(HomePage());
     return;
   }
 
-  // >>> If You Want when app redirect and back press then not again open app start splash screen but back press then app restart by fromDeepLink flag
+  // ******** If You Want when app redirect and back press then not again open app start splash screen but back press then app restart by fromDeepLink flag
   if (uri.pathSegments.contains('product')) {
     String? id = uri.queryParameters['id'] ?? (uri.pathSegments.length > 1 ? uri.pathSegments.last : null);
     if (id != null && id.isNotEmpty) {
@@ -58,6 +60,6 @@ void handleLink(Uri uri) async{
     }
   }
 }
-/// <<< Open the app page if installed =========================================
+/// ########## ============== Open the app page if installed ===================
 
 

@@ -18,7 +18,7 @@ class _SplashScreenState extends State<SplashScreen> {
     _startApp();
   }
 
-  // *** Must Important For Navigate Back-press / Back Button Control ==========
+  // ***** Must Important For Navigate Back-press / Back Button Control ========
   Future<void> _startApp() async {
     bool hasDeepLink = await initDeepLink();
     await Future.delayed(Duration(seconds: 3));
@@ -26,7 +26,7 @@ class _SplashScreenState extends State<SplashScreen> {
       Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => HomePage()),);
     }
   }
-  // *** Must Important For Navigate Back-press / Back Button Control ==========
+  // ***** Must Important For Navigate Back-press / Back Button Control ========
   
   @override
   Widget build(BuildContext context) {
@@ -36,10 +36,7 @@ class _SplashScreenState extends State<SplashScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                CircleAvatar(
-                  radius: 80,
-                  backgroundImage: AssetImage("assets/icon/deeplink.jpg"),
-                ),
+                CircleAvatar(radius: 80, backgroundImage: AssetImage("assets/icon/deeplink.jpg"),),
                 SizedBox(height: 30,),
                 Text("Deep Linking",style: TextStyle(color: Colors.black,fontSize: 35,fontWeight: FontWeight.bold),)
               ],
