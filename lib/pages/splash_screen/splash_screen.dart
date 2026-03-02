@@ -18,6 +18,7 @@ class _SplashScreenState extends State<SplashScreen> {
     _startApp();
   }
 
+  // *** Must Important For Navigate Back-press / Back Button Control ==========
   Future<void> _startApp() async {
     bool hasDeepLink = await initDeepLink();
     await Future.delayed(Duration(seconds: 3));
@@ -25,6 +26,7 @@ class _SplashScreenState extends State<SplashScreen> {
       Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => HomePage()),);
     }
   }
+  // *** Must Important For Navigate Back-press / Back Button Control ==========
   
   @override
   Widget build(BuildContext context) {
