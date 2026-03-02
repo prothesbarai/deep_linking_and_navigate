@@ -293,7 +293,7 @@ navigatorKey : NavigationService.navigatorKey,
 ```
 
 
-# SHA key Find Command
+# SHA key Find Command 
 ```dtd
     keytool -list -v -keystore "C:\Users\Prothes\.android\debug.keystore" -alias androiddebugkey -storepass android -keypass android
 ```
