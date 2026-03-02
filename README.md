@@ -1,4 +1,9 @@
-# deep_linking_and_navigate
+# Deep Linking And Navigate 
+---
+
+### 📝 Note By
+🔗 [Shreyasi Madhu](https://github.com/shreyasimadhu)
+---
 
 Deep Linking Application
 
@@ -25,25 +30,25 @@ Deep Linking Application
 import 'package:flutter/material.dart';
 
 class NavigationService {
-  // >>> Global navigator key
+  // ***** Global navigator key
   static final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
-  // >>> Push to a new page
+  // ***** Push to a new page
   static Future<dynamic>? push(Widget page) {
     return navigatorKey.currentState?.push(MaterialPageRoute(builder: (_) => page),);
   }
 
-  // >>> Replace current page
+  // ***** Replace current page
   static Future<dynamic>? pushReplacement(Widget page) {
     return navigatorKey.currentState?.pushReplacement(MaterialPageRoute(builder: (_) => page),);
   }
 
-  // >>> Pop current page
+  // ***** Pop current page
   static void pop([dynamic result]) {
     navigatorKey.currentState?.pop(result);
   }
 
-  // >>> Pop all and go to a page
+  // ***** Pop all and go to a page
   static Future<dynamic>? popAllAndPush(Widget page) {
     return navigatorKey.currentState?.pushAndRemoveUntil(MaterialPageRoute(builder: (_) => page), (route) => false,);
   }
@@ -79,22 +84,22 @@ Future<bool> initDeepLink() async{
   return false;
 }
 
-/// >>> Open the app page if installed =========================================
+/// ***** ================= Open the app page if installed =========================================
 void handleLink(Uri uri) async{
   debugPrint("Deep link: $uri");
 
-  // Supported domains / schemes
-  List<String> supportedDomains = ["prothesbarai.github.io", "prothesbarai.github", "https://prothesbarai.io"];
+  // ***** Supported domains / schemes
+  List<String> supportedDomains = ["prothesbarai.github.io", "prothesbarai.github", "https://prothesbarai.io", "https://shreyasimadhu.github.io", "shreyasimadhu.github.io", "shreyasimadhu.github"];
   bool domainSupported = supportedDomains.any((d) => uri.host.endsWith(d));
 
   if (!domainSupported) {
-    // >>> Unsupported domain, fallback behavior
+    // ***** Unsupported domain, fallback behavior
     debugPrint("Unsupported domain: redirecting to homepage or Play Store");
     NavigationService.push(HomePage());
     return;
   }
 
-  // >>> If You Want when app redirect and back press then not again open app start splash screen but back press then app restart by fromDeepLink flag
+  // ***** If You Want when app redirect and back press then not again open app start splash screen but back press then app restart by fromDeepLink flag
   if (uri.pathSegments.contains('product')) {
     String? id = uri.queryParameters['id'] ?? (uri.pathSegments.length > 1 ? uri.pathSegments.last : null);
     if (id != null && id.isNotEmpty) {
@@ -111,16 +116,16 @@ void handleLink(Uri uri) async{
     }
   }
 }
-/// <<< Open the app page if installed =========================================
+/// ###### ================= Open the app page if installed ========================================
 ```
 
 ## Now main.dart Call
 ```dart
 void main() {
-  WidgetsFlutterBinding.ensureInitialized(); // >>> Mandatory
+  WidgetsFlutterBinding.ensureInitialized(); // *** Mandatory
   runApp(const MyApp());
 }
-// >>> In MaterialApp Function Write this line 
+// ***** In MaterialApp Function Write this line 
 navigatorKey : NavigationService.navigatorKey,
 ```
 
@@ -144,7 +149,7 @@ navigatorKey : NavigationService.navigatorKey,
 
 ## Now deep_link_handler.dart page Navigate to overall Page [যে যে পেইজে নেভিগেট হবে সে সব পেইজে এই কো লিখতে হবে কারন যখন ডিপ লিংক থেকে ইউজার নেভিগেট করবে এবং পরে যখন Back Button এ Click করবে তখন যেন App পুনরায় Restart হয়ে Simple Behavior করে ] Write Code
 ```dart
-  final bool fromDeepLink; // >> Parameter
+  final bool fromDeepLink; // *** Parameter
 ```
 ```dart
   return PopScope(
@@ -167,20 +172,20 @@ navigatorKey : NavigationService.navigatorKey,
 - - নেভিগেট করুন android/app/src/main/AndroidManifest.xml
 - - - <activity>ট্যাগের ভিতরে নিম্নলিখিত মেটাডেটা ট্যাগ এবং ইনটেন্ট ফিল্টার যোগ করুন
 ```xml
-    <!--Deep Linking Purpose Add -->
+    <!-- Deep Linking Purpose Add -->
     <intent-filter android:autoVerify="true">
         <action android:name="android.intent.action.VIEW" />
         <category android:name="android.intent.category.DEFAULT" />
         <category android:name="android.intent.category.BROWSABLE" />
-        <data android:scheme="https" android:host="prothesbarai.github.io" android:pathPrefix="/" />
+        <data android:scheme="https" android:host="shreyasimadhu.github.io" android:pathPrefix="/" />
     </intent-filter>
 ```
-- - - Note : android:host="example.com"  Here Your Domain Name >> Ex : prothesbarai.github.io
+- - - Note : android:host="example.com"  Here Your Domain Name >> Ex : shreyasimadhu.github.io 
 
 ## Final Server Setup code
 - assetlinks.json (Server এ দিতে হবে)
 ```dtd
- https://yourdomain.com/.well-known/assetlinks.json
+ https://domainName.com/.well-known/assetlinks.json
 ```
 - Example:
 ```json
@@ -189,8 +194,8 @@ navigatorKey : NavigationService.navigatorKey,
     "relation": ["delegate_permission/common.handle_all_urls"],
     "target": {
       "namespace": "android_app",
-      "package_name": "com.your.app",
-      "sha256_cert_fingerprints": ["YOUR_SHA256"]
+      "package_name": "com.shreyasi.app",
+      "sha256_cert_fingerprints": ["SHA256"]
     }
   }
 ]
@@ -274,7 +279,7 @@ navigatorKey : NavigationService.navigatorKey,
   <script>
     var storeUrl = "https://play.google.com/store/apps/details?id=com.deep_linking_and_navigate";
 
-    // Wait 1.5 sec then redirect to Play Store
+    // ***** Wait 1.5 sec then redirect to Play Store
     setTimeout(function () { window.location.href = storeUrl;}, 1500);
   </script>
 </head>
@@ -293,9 +298,9 @@ navigatorKey : NavigationService.navigatorKey,
 ```
 
 
-# SHA key Find Command 
+# SHA key Find Command Directly Use Android Studio
 ```dtd
-    keytool -list -v -keystore "C:\Users\Prothes\.android\debug.keystore" -alias androiddebugkey -storepass android -keypass android
+    keytool -list -v -keystore "C:\Users\ShreyasiMadhu\.android\debug.keystore" -alias androiddebugkey -storepass android -keypass android
 ```
 
 
