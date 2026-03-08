@@ -147,7 +147,7 @@ navigatorKey : NavigationService.navigatorKey,
   }
 ```
 
-## Now deep_link_handler.dart page Navigate to overall Page [যে যে পেইজে নেভিগেট হবে সে সব পেইজে এই কো লিখতে হবে কারন যখন ডিপ লিংক থেকে ইউজার নেভিগেট করবে এবং পরে যখন Back Button এ Click করবে তখন যেন App পুনরায় Restart হয়ে Simple Behavior করে ] Write Code
+## Now deep_link_handler.dart page Navigate to overall Page [যে যে পেইজে নেভিগেট হবে সে সব পেইজে এই কোড লিখতে হবে কারন যখন ডিপ লিংক থেকে ইউজার নেভিগেট করবে এবং পরে যখন Back Button এ Click করবে তখন যেন App পুনরায় Restart হয়ে Simple Behavior করে ] Write Code
 ```dart
   final bool fromDeepLink; // *** Parameter
 ```
