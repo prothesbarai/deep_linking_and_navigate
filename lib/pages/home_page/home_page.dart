@@ -19,7 +19,7 @@ class _HomePageState extends State<HomePage> {
 
   int _currentIndex = 0;
   List<Widget> pages = [CategoryPage(catId: "12",fromDeepLink: false,),MembershipPage(fromDeepLink: false,),MessagePage(), DashBoard()];
-  List<String> appBarTitles = ["Category", "Membership", "Message", "Dashboard",];
+  List<String> appBarTitles = ["Page 1", "Page 2", "Page 3", "Page 4",];
 
 
   @override

@@ -18,13 +18,13 @@ class CustomBottomBar extends StatelessWidget {
           children: [
 
             IconButton(
-              icon: const Icon(Icons.category),
+              icon: const Icon(Icons.pages),
               color: currentIndex == 0 ? Colors.white : Colors.white70,
               onPressed: () => onTap(0),
             ),
 
             IconButton(
-              icon: const Icon(Icons.card_membership),
+              icon: const Icon(Icons.pages_outlined),
               color: currentIndex == 1 ? Colors.white : Colors.white70,
               onPressed: () => onTap(1),
             ),
@@ -32,7 +32,7 @@ class CustomBottomBar extends StatelessWidget {
             const SizedBox(width: 40),
 
             IconButton(
-              icon: const Icon(Icons.message),
+              icon: const Icon(Icons.supervisor_account),
               color: currentIndex == 2 ? Colors.white : Colors.white70,
               onPressed: () => onTap(2),
             ),
