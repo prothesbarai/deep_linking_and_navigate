@@ -182,11 +182,21 @@ navigatorKey : NavigationService.navigatorKey,
 ```
 - - - Note : android:host="example.com"  Here Your Domain Name >> Ex : shreyasimadhu.github.io 
 
-## Final Server Setup code
+# 🌐 Final Server Setup code
 - assetlinks.json (Server এ দিতে হবে)
 ```dtd
  https://domainName.com/.well-known/assetlinks.json
 ```
+### Important Note : 
+প্রতি domain এর জন্য আলাদা .well-known লাগবে
+- 1️⃣ Domain 1: https://abc.com/.well-known/assetlinks.json
+- 2️⃣ Domain 2: https://xyz.com/.well-known/assetlinks.json
+- ..........
+- 
+- দুইটা server-এই একই content থাকবে (যদি app same হয়)
+### 🚀 Summary
+- ২টা domain = ২টা .well-known  && same app হলে same JSON use করা যাবে && Flutte code এ https:// use করা যাবে না শুধু host check করতে হবে
+- যতগুলো domain থাকবে → প্রতিটাতে আলাদা .well-known দিতে হবে 👉 কিন্তু JSON content SAME থাকবে (কারণ app একটাই)
 - Example:
 ```json
 [
