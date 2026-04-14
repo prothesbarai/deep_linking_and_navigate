@@ -33,7 +33,7 @@ void handleLink(Uri uri) async{
   debugPrint("Deep link: $uri");
 
   // ***** Supported domains / schemes
-  List<String> supportedDomains = ["prothesbarai.github.io", "prothesbarai.github", "https://prothesbarai.io", "https://shreyasimadhu.github.io", "shreyasimadhu.github.io", "shreyasimadhu.github"];
+  List<String> supportedDomains = ["prothesbarai.github.io", "prothesbarai.github", "shreyasimadhu.github.io", "shreyasimadhu.github"];
   bool domainSupported = supportedDomains.any((d) => uri.host.endsWith(d));
 
   if (!domainSupported) {
