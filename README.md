@@ -168,11 +168,11 @@ navigatorKey : NavigationService.navigatorKey,
 
 
 # 🟢 ANDROID (Kotlin Setup)
-- Setup For Android :
+- Setup For Android If(Single Domain):
 - - নেভিগেট করুন android/app/src/main/AndroidManifest.xml
 - - - activity ট্যাগের ভিতরে নিম্নলিখিত মেটাডেটা ট্যাগ এবং ইনটেন্ট ফিল্টার যোগ করুন
 ```xml
-    <!-- Deep Linking Purpose Add -->
+    <!-- Deep Linking Purpose Add Single Domain -->
     <intent-filter android:autoVerify="true">
         <action android:name="android.intent.action.VIEW" />
         <category android:name="android.intent.category.DEFAULT" />
@@ -180,6 +180,24 @@ navigatorKey : NavigationService.navigatorKey,
         <data android:scheme="https" android:host="shreyasimadhu.github.io" android:pathPrefix="/" />
     </intent-filter>
 ```
+- For (Multiple Domain):
+```xml
+    <!-- Deep Linking Purpose Add Multiple Domanin -->
+    <intent-filter android:autoVerify="true">
+        <action android:name="android.intent.action.VIEW" />
+        <category android:name="android.intent.category.DEFAULT" />
+        <category android:name="android.intent.category.BROWSABLE" />
+        <!-- Domain 1 -->
+        <data android:scheme="https" android:host="shreyasimadhu.github.io" android:pathPrefix="/" />
+        <!-- Domain 2 -->
+        <data android:scheme="https" android:host="example.com" android:pathPrefix="/" />
+        <!-- Domain 3 -->
+        <data android:scheme="https" android:host="example.com" android:pathPrefix="/" />
+        ......
+        ......
+    </intent-filter>
+```
+
 - - - Note : android:host="example.com"  Here Your Domain Name >> Ex : shreyasimadhu.github.io 
 
 # 🌐 Final Server Setup code
