@@ -170,7 +170,7 @@ navigatorKey : NavigationService.navigatorKey,
 # 🟢 ANDROID (Kotlin Setup)
 - Setup For Android :
 - - নেভিগেট করুন android/app/src/main/AndroidManifest.xml
-- - - &ltactivity&gt ট্যাগের ভিতরে নিম্নলিখিত মেটাডেটা ট্যাগ এবং ইনটেন্ট ফিল্টার যোগ করুন
+- - - activity ট্যাগের ভিতরে নিম্নলিখিত মেটাডেটা ট্যাগ এবং ইনটেন্ট ফিল্টার যোগ করুন
 ```xml
     <!-- Deep Linking Purpose Add -->
     <intent-filter android:autoVerify="true">
