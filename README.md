@@ -11,7 +11,7 @@ Deep Linking Application
 
 # Deep Linking Guide
 #### Deep linking এর মাধ্যমে ব্যবহারকারী সরাসরি কোনো URL বা লিঙ্ক থেকে অ্যাপের নির্দিষ্ট পেজে পৌঁছাতে পারে। এটি চ্যাট অ্যাপে খুবই গুরুত্বপূর্ণ, যেমন: নির্দিষ্ট চ্যাট রুমে সরাসরি যাওয়া।
-# 🎯 Deep Linking Rule মনে রাখো
+# 🎯 Deep Linking Rule
 - Scenario	>>>>>>     কে control করে?
 - App installed	>>     Android OS
 - App not installed	>> Browser
