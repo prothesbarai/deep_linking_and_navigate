@@ -331,5 +331,12 @@ navigatorKey : NavigationService.navigatorKey,
     keytool -list -v -keystore "C:\Users\ShreyasiMadhu\.android\debug.keystore" -alias androiddebugkey -storepass android -keypass android
 ```
 
+# SHA key Find (For MAC)
+```dtd
+    keytool -list -v -keystore ~/.android/debug.keystore \
+-alias androiddebugkey \
+-storepass android \
+-keypass android
+```
 
 
