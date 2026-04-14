@@ -195,7 +195,7 @@ navigatorKey : NavigationService.navigatorKey,
 - 
 - দুইটা server-এ একই content থাকবে (যদি app same হয়)
 ### 🚀 Summary
-- ২টা domain = ২টা .well-known  && same app হলে same JSON use করা যাবে && Flutte code এ https:// use করা যাবে না শুধু host check করতে হবে
+- ২টা domain = ২টা .well-known  && same app হলে same JSON use করা যাবে && Flutter code এ https:// use করা যাবে না শুধু host check করতে হবে
 - যতগুলো domain থাকবে → প্রতিটাতে আলাদা .well-known দিতে হবে 👉 কিন্তু JSON content SAME থাকবে (কারণ app একটাই)
 - Example:
 ```json
