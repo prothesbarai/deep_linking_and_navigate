@@ -324,7 +324,44 @@ navigatorKey : NavigationService.navigatorKey,
 </body>
 </html>
 ```
+# Smart Redirect Page (Android + iOS)
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Opening App...</title>
+  <script>
+    var androidPackage = "com.your.package";
+    var iosAppId = "1234567890"; // App Store ID
+    var deepLink = "https://yourdomain.com/product/10";
+    var ua = navigator.userAgent || navigator.vendor || window.opera;
+    function openApp() {
+      // >>> Try open Universal/App Link
+      window.location.href = deepLink;
+      // >>> Fallback after 1.5 sec
+      setTimeout(function () {
+        if (/android/i.test(ua)) {
+          window.location.href = "https://play.google.com/store/apps/details?id=" + androidPackage;
+        } else if (/iPhone|iPad|iPod/i.test(ua)) {
+          window.location.href = "https://apps.apple.com/app/id" + iosAppId;
+        } else {
+          // >>> Desktop fallback
+          window.location.href = "https://yourdomain.com";
+        }
+      }, 1500);
+    }
+  </script>
+</head>
 
+<body onload="openApp()" style="text-align:center; font-family: Arial; margin-top:100px;">
+  <h2>Opening App...</h2>
+  <p>If nothing happens, please wait or click below:</p>
+  <p> <a href="https://play.google.com/store/apps/details?id=com.your.package"> Open in Android</a></p>
+  <p> <a href="https://apps.apple.com/app/id1234567890"> Open in iOS </a> </p>
+</body>
+</html>
+```
 
 # SHA key Find Command Directly Use Android Studio (For Windows)
 ```dtd
