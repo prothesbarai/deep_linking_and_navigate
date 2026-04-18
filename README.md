@@ -365,7 +365,7 @@ navigatorKey : NavigationService.navigatorKey,
 
 # SHA key Find Command Directly Use Android Studio (For Windows)
 ```dtd
-    keytool -list -v -keystore "C:\Users\ShreyasiMadhu\.android\debug.keystore" -alias androiddebugkey -storepass android -keypass android
+keytool -list -v -keystore "C:\Users\ShreyasiMadhu\.android\debug.keystore" -alias androiddebugkey -storepass android -keypass android
 ```
 
 # SHA key Find (For MAC)
