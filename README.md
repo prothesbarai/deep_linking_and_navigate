@@ -99,37 +99,6 @@ void handleLink(Uri uri) async{
     return;
   }
 
- /* /// >>> Extract query params safely
-  final params = uri.queryParameters;
-  // >>>> For Type1 Extract ==========================================
-  String? type = params['type'];
-  String? id = params['id'] ?? (uri.pathSegments.isNotEmpty && int.tryParse(uri.pathSegments.last) != null ? uri.pathSegments.last : null);
-  String? slug = params['slug'];
-  // String? app = params['app'] ?? (uri.pathSegments.isNotEmpty && int.tryParse(uri.pathSegments.last) != null ? uri.pathSegments.last : null);
-  // <<<< For Type1 Extract ==========================================
-
-
-  // >>>> Other Extract ===============================
-  String? name = params['name'];
-  String? phone = params['phone'];
-  bool isOpen = openValue == "true";
-  // <<<< Other Purpose Extract ======================
-
-
-  if ( uri.path.contains('product') || uri.pathSegments.contains('product') || type == "product" ) {
-    if (sin != null && sin.isNotEmpty) {
-      int? productId = int.tryParse(sin);
-      Future.microtask(() {
-        NavigationService.popAllAndPush(ProductDetailsPage(productId: productId ?? 0, fromDeepLink: true,));
-      });
-    }
-  }
-  else if (uri.path.contains('membership') || uri.pathSegments.contains('membership') || type == "membership") {
-    Future.microtask(() {
-      NavigationService.popAllAndPush(MembershipCardsPage(fromDeepLink: true,));
-    });
-  }*/
-
 
   // ***** If You Want when app redirect and back press then not again open app start splash screen but back press then app restart by fromDeepLink flag
   if (uri.pathSegments.contains('product')) {
