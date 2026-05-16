@@ -233,11 +233,12 @@ navigatorKey : NavigationService.navigatorKey,
     "target": {
       "namespace": "android_app",
       "package_name": "com.shreyasi.app",
-      "sha256_cert_fingerprints": ["SHA256"]
+      "sha256_cert_fingerprints": ["SHA256","Play-Store Register SHA (Android developer verification SHA)"]
     }
   }
 ]
 ```
+- Note : অ্যাপ লিংক কাজ করার জন্য দরকার “App signing certificate” (যেটা Google ব্যবহার করে)। তাই সবচেয়ে সহজ: Play Console → App signing → SHA-256 কপি করুন। সেটাই ব্যবহার করবেন।
 
 
 # 🍎 iOS (Swift Setup)
