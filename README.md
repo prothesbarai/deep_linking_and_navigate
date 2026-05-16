@@ -385,4 +385,14 @@ keytool -list -v -keystore "C:\Users\ShreyasiMadhu\.android\debug.keystore" -ali
 -keypass android
 ```
 
+## Deep-Link Verify Domain Check Command
+- Step 1 : Open CMD and Go to this location
+```bash
+cd C:\Users\Prothes\AppData\Local\Android\Sdk\platform-tools
+```
+- Step 2 : Run This Command
+```bash
+adb shell pm get-app-links com.your.package
+```
+
 
