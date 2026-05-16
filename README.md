@@ -177,25 +177,34 @@ navigatorKey : NavigationService.navigatorKey,
         <action android:name="android.intent.action.VIEW" />
         <category android:name="android.intent.category.DEFAULT" />
         <category android:name="android.intent.category.BROWSABLE" />
-        <data android:scheme="https" android:host="shreyasimadhu.github.io" android:pathPrefix="/" />
+        <data android:scheme="https" android:host="shreyasimadhu.github.io" />
     </intent-filter>
 ```
 - For (Multiple Domain):
 ```xml
-    <!-- Deep Linking Purpose Add Multiple Domanin -->
-    <intent-filter android:autoVerify="true">
-        <action android:name="android.intent.action.VIEW" />
-        <category android:name="android.intent.category.DEFAULT" />
-        <category android:name="android.intent.category.BROWSABLE" />
-        <!-- Domain 1 -->
-        <data android:scheme="https" android:host="shreyasimadhu.github.io" android:pathPrefix="/" />
-        <!-- Domain 2 -->
-        <data android:scheme="https" android:host="example.com" android:pathPrefix="/" />
-        <!-- Domain 3 -->
-        <data android:scheme="https" android:host="example.com" android:pathPrefix="/" />
-        ......
-        ......
-    </intent-filter>
+<!-- Deep Linking Purpose Add -->
+<!-- Domain 1 -->
+<intent-filter android:autoVerify="true">
+  <action android:name="android.intent.action.VIEW" />
+  <category android:name="android.intent.category.DEFAULT" />
+  <category android:name="android.intent.category.BROWSABLE" />
+  <data android:scheme="https" android:host="shreyasimadhu.github.io"/>
+</intent-filter>
+<!-- Domain 2 -->
+<intent-filter android:autoVerify="true">
+  <action android:name="android.intent.action.VIEW" />
+  <category android:name="android.intent.category.DEFAULT" />
+  <category android:name="android.intent.category.BROWSABLE" />
+  <data android:scheme="https" android:host="example.com"/>
+</intent-filter>
+<!-- Domain 3 -->
+<intent-filter android:autoVerify="true">
+  <action android:name="android.intent.action.VIEW" />
+  <category android:name="android.intent.category.DEFAULT" />
+  <category android:name="android.intent.category.BROWSABLE" />
+  <data android:scheme="https" android:host="example.com"/>
+</intent-filter>
+<!-- Deep Linking Purpose Add -->
 ```
 
 - - - Note : android:host="example.com"  Here Your Domain Name >> Ex : shreyasimadhu.github.io 
