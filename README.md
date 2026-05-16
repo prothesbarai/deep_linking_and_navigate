@@ -183,29 +183,14 @@ navigatorKey : NavigationService.navigatorKey,
 ```
 - For (Multiple Domain):
 ```xml
-<!-- Deep Linking Purpose Add -->
-<!-- Domain 1 -->
 <intent-filter android:autoVerify="true">
-  <action android:name="android.intent.action.VIEW" />
-  <category android:name="android.intent.category.DEFAULT" />
-  <category android:name="android.intent.category.BROWSABLE" />
+  <action android:name="android.intent.action.VIEW"/>
+  <category android:name="android.intent.category.DEFAULT"/>
+  <category android:name="android.intent.category.BROWSABLE"/>
   <data android:scheme="https" android:host="shreyasimadhu.github.io"/>
+  <data android:scheme="https" android:host="domain2"/>
+  <data android:scheme="https" android:host="domain3"/>
 </intent-filter>
-<!-- Domain 2 -->
-<intent-filter android:autoVerify="true">
-  <action android:name="android.intent.action.VIEW" />
-  <category android:name="android.intent.category.DEFAULT" />
-  <category android:name="android.intent.category.BROWSABLE" />
-  <data android:scheme="https" android:host="example.com"/>
-</intent-filter>
-<!-- Domain 3 -->
-<intent-filter android:autoVerify="true">
-  <action android:name="android.intent.action.VIEW" />
-  <category android:name="android.intent.category.DEFAULT" />
-  <category android:name="android.intent.category.BROWSABLE" />
-  <data android:scheme="https" android:host="example.com"/>
-</intent-filter>
-<!-- Deep Linking Purpose Add -->
 ```
 
 - - - Note : android:host="example.com"  Here Your Domain Name >> Ex : shreyasimadhu.github.io 
